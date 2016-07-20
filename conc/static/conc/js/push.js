@@ -8,8 +8,13 @@ $(document).ready(function () {
     var socket = new ReconnectingWebSocket(scheme + '://' + window.location.host + '/conc/');
 
     socket.onmessage = function (e) {
+        var current = $("h2#current");
+        var newItem = $("<h2></h2>").text(e.data);
+        newItem.attr({"id": "current"})
+        current.before(newItem);
+        current.removeAttr("id")
     }
-    
+
     socket.onopen = function () {
     }
 });

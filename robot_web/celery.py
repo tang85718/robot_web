@@ -16,14 +16,21 @@ app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
 # Optional configuration, see the application user guide.
 app.conf.update(
+    CELERY_TIMEZONE='Asia/Shanghai',
     CELERY_TASK_RESULT_EXPIRES=3600,
+    CELERYBEAT_SCHEDULER='djcelery.schedulers.DatabaseScheduler',
     CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend',
+    CELERY_ACCEPT_CONTENT=['pickle', 'json', 'msgpack', 'yaml'],
+    #: Only add pickle to this list if your broker is secured
+    #: from unwanted access (see userguide/security.html)
+    # CELERY_ACCEPT_CONTENT=['json'],
+    CELERY_TASK_SERIALIZER='json',
+    CELERY_RESULT_SERIALIZER='json',
 )
 
 
-@app.task(bind=True)
-def debug_task(self):
-    print('Request: {0!r}'.format(self.requset))
-
-# if __name__ == '__main__':
-#     app.start()
+# Celery settings
+# CELERY_TIMEZONE='Asia/Shanghai'
+# BROKER_URL = 'amqp://guest:guest@localhost//'
+# CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+# CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend',
