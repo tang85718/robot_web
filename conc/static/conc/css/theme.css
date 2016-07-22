@@ -1,3 +1,24 @@
 #header {
     height: 50px;
 }
+
+.conc-frame-right {
+    position: relative;
+    float: right;
+    min-width: 25%;
+    max-width: 300px;
+    min-height: 500px;
+    background-color: chartreuse;
+
+    padding-left: 10px;
+}
+
+.conc-frame-left {
+    position: relative;
+    float: left;
+    background-color: navy;
+    padding-left: 10px;
+    min-width: 75%;
+    min-height: 500px;
+}
+

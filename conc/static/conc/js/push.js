@@ -8,11 +8,11 @@ $(document).ready(function () {
     var socket = new ReconnectingWebSocket(scheme + '://' + window.location.host + '/conc/');
 
     socket.onmessage = function (e) {
-        var current = $("h2#current");
+        var current = $("h2[cursor=current]");
         var newItem = $("<h2></h2>").text(e.data);
-        newItem.attr({"id": "current"})
+        newItem.attr({"cursor": "current"})
         current.before(newItem);
-        current.removeAttr("id")
+        current.removeAttr("cursor")
     }
 
     socket.onopen = function () {
